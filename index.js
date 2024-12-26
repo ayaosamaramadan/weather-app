@@ -46,10 +46,19 @@ async function gett() {
   let search = document.getElementById("search");
   let searchBtn = document.getElementById("searchBtn");
 
-  searchBtn.addEventListener("click", () => {
+  function searchCity() {
     let searchValue = search.value;
     url = `https://api.openweathermap.org/data/2.5/weather?units=metric&q=${searchValue}`;
     gett();
+  }
+  searchBtn.addEventListener("click", () => {
+    searchCity();
+  });
+
+  search.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+      searchCity();
+    }
   });
 
 gett();
