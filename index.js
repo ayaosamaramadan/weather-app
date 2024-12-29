@@ -1,6 +1,6 @@
 let keyy = "05aef76b4355cdab242f0489ab39d93f";
 let url =
-  "https://api.openweathermap.org/data/2.5/weather?units=metric&q=london";
+  "https://api.openweathermap.org/data/2.5/weather?units=metric&q=egypt";
 
   let searchBtn = document.getElementById("searchBtn");
 
