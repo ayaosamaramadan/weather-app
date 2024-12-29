@@ -1,6 +1,8 @@
 let keyy = "05aef76b4355cdab242f0489ab39d93f";
 let url =
-  "https://api.openweathermap.org/data/2.5/weather?units=metric&q=egypt";
+  "https://api.openweathermap.org/data/2.5/weather?units=metric&q=london";
+
+  let searchBtn = document.getElementById("searchBtn");
 
 async function gett() {
   const response = await fetch(url + "&appid=" + keyy);
@@ -17,19 +19,22 @@ async function gett() {
   document.getElementById("humidity").innerText = data.main.humidity + "%";
   document.getElementById("wind").innerText = data.wind.speed + " m/s";
 
-
   // change bg depend on weather
   switch (data.weather[0].main) {
     case "Clear":
       document.body.style.backgroundImage = "url('./imgs/clear.jpg')";
+      searchBtn.style.color = "black";
+
       break;
     case "Clouds":
       document.body.style.backgroundImage = "url('./imgs/cloud.jpg')";
+      searchBtn.style.color = "white";
       break;
     case "Rain":
     case "Drizzle":
     case "Mist":
       document.body.style.backgroundImage = "url('./imgs/rainy.jpg')";
+      searchBtn.style.color = "gray";
       break;
     case "Thunderstorm":
       document.body.style.backgroundImage = "url('./imgs/storm.jpg')";
@@ -40,25 +45,30 @@ async function gett() {
     default:
       break;
   }
+
+  // reapply the backgroundChange animation
+  document.body.style.animation = 'none';
+  document.body.offsetHeight;
+  document.body.style.animation = 'backgroundChange 3s ease-in-out';
+ }
+// identify search
+let search = document.getElementById("search");
+
+
+function searchCity() {
+  let searchValue = search.value;
+  url = `https://api.openweathermap.org/data/2.5/weather?units=metric&q=${searchValue}`;
+  document.getElementById("weatherContainer").style.animation = "fadeIn 3s";
+  gett();
 }
+searchBtn.addEventListener("click", () => {
+  searchCity();
+});
 
-  // identify search
-  let search = document.getElementById("search");
-  let searchBtn = document.getElementById("searchBtn");
-
-  function searchCity() {
-    let searchValue = search.value;
-    url = `https://api.openweathermap.org/data/2.5/weather?units=metric&q=${searchValue}`;
-    gett();
-  }
-  searchBtn.addEventListener("click", () => {
+search.addEventListener("keypress", (e) => {
+  if (e.key === "Enter") {
     searchCity();
-  });
-
-  search.addEventListener("keypress", (e) => {
-    if (e.key === "Enter") {
-      searchCity();
-    }
-  });
+  }
+});
 
 gett();
