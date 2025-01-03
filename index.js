@@ -2,15 +2,26 @@ let keyy = "05aef76b4355cdab242f0489ab39d93f";
 let url =
   "https://api.openweathermap.org/data/2.5/weather?units=metric&q=egypt";
 
-  let searchBtn = document.getElementById("searchBtn");
 
+  let searchBtn = document.getElementById("searchBtn");
+let namee;
+let searchValue;
 async function gett() {
-  const response = await fetch(url + "&appid=" + keyy);
+  try {
+    const response = await fetch(url + "&appid=" + keyy);
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status} ${response.statusText}`);
+    }
+
   const data = await response.json();
-  console.log(data);
+  
+  console.log(data.name);
+
+  namee=data.name;
+
 
   // identify the data
-  document.getElementById("locName").innerText = data.name;
+ document.getElementById("locName").innerText = data.name;
   document.getElementById("temp").innerText = data.main.temp + "°C";
   document.getElementById("weather").innerText = data.weather[0].main;
   document.getElementById("minTemp").innerText = data.main.temp_min + "°C";
@@ -50,16 +61,51 @@ async function gett() {
   document.body.style.animation = 'none';
   document.body.offsetHeight;
   document.body.style.animation = 'backgroundChange 3s ease-in-out';
+} catch (error) {
+  // console.error("wa2 :'");
+  let notif = document.createElement("div");
+  notif.setAttribute("class", "notif show");
+  let p = document.createElement("p");
+  p.setAttribute("class", "notif-p");
+  p.innerHTML = `<i class="fa-solid fa-x err"></i>  Please enter a city name`;
+  notif.appendChild(p);
+  document.body.appendChild(notif);
+  setTimeout(() => {
+    notif.classList.remove("show");
+    notif.classList.add("hide");
+    setTimeout(() => {
+      notif.remove();
+    }, 300);
+  }, 2000);
+}
  }
 // identify search
 let search = document.getElementById("search");
 
 
 function searchCity() {
-  let searchValue = search.value;
-  url = `https://api.openweathermap.org/data/2.5/weather?units=metric&q=${searchValue}`;
+   searchValue = search.value;
+  if ( searchValue === " " || searchValue === "" || searchValue === null) {
+    let notif = document.createElement("div");
+    notif.setAttribute("class", "notif show");
+    let p = document.createElement("p");
+    p.setAttribute("class", "notif-p");
+    p.innerHTML = `<i class="fa-solid fa-x err"></i>  Please enter a city name`;
+    notif.appendChild(p);
+    document.body.appendChild(notif);
+    setTimeout(() => {
+      notif.classList.remove("show");
+      notif.classList.add("hide");
+      setTimeout(() => {
+        notif.remove();
+      }, 300);
+    }, 2000);
+  }  
+  else{
+    url = `https://api.openweathermap.org/data/2.5/weather?units=metric&q=${searchValue}`;
   document.getElementById("weatherContainer").style.animation = "fadeIn 3s";
   gett();
+  }
 }
 searchBtn.addEventListener("click", () => {
   searchCity();
@@ -72,3 +118,4 @@ search.addEventListener("keypress", (e) => {
 });
 
 gett();
+
