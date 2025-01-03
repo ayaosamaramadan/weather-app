@@ -738,29 +738,10 @@ video {
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
-.notif {
-  animation-duration: 0.3s;
-  animation-fill-mode: forwards;
-}
-
-.notif.show {
-  animation-name: slideIn;
-}
-
-.focus\:outline-none:focus {
-  outline: 2px solid transparent;
-  outline-offset: 2px;
-}
-
-.focus\:ring-2:focus {
-  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
-  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
-  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
-}
-
-.focus\:ring-blue-500:focus {
-  --tw-ring-opacity: 1;
-  --tw-ring-color: rgb(59 130 246 / var(--tw-ring-opacity, 1));
+body {
+  background-repeat: no-repeat;
+  height: 100vh;
+  background-position: center top;
 }
 
 @keyframes slideIn {
@@ -768,6 +749,7 @@ video {
     opacity: 0;
     transform: translateY(-20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -779,6 +761,7 @@ video {
     opacity: 1;
     transform: translateY(0);
   }
+
   to {
     opacity: 0;
     transform: translateY(-20px);
@@ -802,25 +785,9 @@ video {
   margin: 0;
 }
 
-.notif {
-  background-color: rgba(255, 255, 255, 0.404);
-  color: #474545;
-  padding: 10px;
-  padding-right: 20px;
-  padding-left: 20px;
-  border-radius: 30px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  font-size: 1rem;
-  top: 0;
-  left: 40%;
-  margin-top: 20px;
-  position: absolute;
-  display: fixed;
-  text-align: center;
-}
-
 .err {
-  background-color: #f44336;
+  background-color: #f4433696;
+  color: white;
   padding: 7px;
   padding-right: 10px;
   padding-left: 10px;
@@ -832,3 +799,96 @@ video {
   font-size: 1.5rem;
   font-weight: 700;
 }
+
+@keyframes backgroundChange {
+  0% {
+    background-position:center bottom;
+    opacity: 0;
+  }
+
+  100% {
+    background-position:center top;
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.notif {
+  background-color: rgba(255, 255, 255, 0.404);
+  color: #474545;
+  padding: 10px;
+  padding-right: 20px;
+  padding-left: 20px;
+  border-radius: 30px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-size: 1rem;
+  top: 0;
+  margin-top: 20px;
+  position: absolute;
+  display: fixed;
+  text-align: center;
+}
+
+@media (max-width: 1440px) {
+  .notif {
+    left: 40%;
+  }
+}
+
+@media (max-width: 1024px) {
+  .notif {
+    left: 35%;
+  }
+}
+
+@media (max-width: 768px) {
+  .notif {
+    left: 30%;
+  }
+}
+
+@media (max-width: 425px) {
+  .notif {
+    left: 20%;
+  }
+}
+
+@media (max-width: 375px) {
+  .notif {
+    left: 15%;
+  }
+}
+
+@media (max-width: 320px) {
+  .notif {
+    left: 10%;
+  }
+}
+
+.focus\:outline-none:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+.focus\:ring-2:focus {
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+}
+
+.focus\:ring-blue-500:focus {
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgb(59 130 246 / var(--tw-ring-opacity, 1));
+}
+
